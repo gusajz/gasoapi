@@ -8,8 +8,9 @@
 
 
 (defn input []
-  (frmt/csv "https://creboveda.blob.core.windows.net/transparencia/preciopublicovigente.csv"))
+  (frmt/csv "http://publicacionexterna.azurewebsites.net/publicaciones/preciopublicovigente"))
 
+;; elviejo  "https://creboveda.blob.core.windows.net/transparencia/preciopublicovigente.csv"
 (defn gas-ids
   [stations]
   (map #(assoc %1 :id %2) stations (rest (range))))
@@ -68,4 +69,5 @@
   []
   (let [data (gas-ids (input))]
     (write-xml "places.xml" (data-gas-stations data))
-    (write-xml "prices.xml" (data-gas-prices data))))
+    (write-xml "prices.xml" (data-gas-prices data))
+    (csv "catalogo-de-gasolineras.csv" input)))
