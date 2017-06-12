@@ -86,5 +86,7 @@
   []
   (let [data (gas-ids (input))]
     (write-xml "places.xml" (data-gas-stations data))
+    (write-xml "places-gasolinera-brand.xml" (elemeno :places (map #(assoc (place %) :brand "Gasolinera")
+                                                                   data)))
     (write-xml "prices.xml" (data-gas-prices data))
     (frmt/csv "catalogo-de-gasolineras.csv" data)))
